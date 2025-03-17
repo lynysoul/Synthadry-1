@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadSceneAsync("TestPlayButtonScene");
+        ScenesManager.Instance.ChangeScene("TestPlayButtonScene");
     }
 
     public void Exit()
