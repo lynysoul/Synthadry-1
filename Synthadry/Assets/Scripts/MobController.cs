@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class MobController : MonoBehaviour
 {
     public enum MobState
     {
@@ -33,18 +33,18 @@ public class EnemyAI : MonoBehaviour
     private float angle;
     private float currentSpeed;
     private Vector3 targetPosition, lastPlayerPosition = Vector3.zero;
-    private Material material;
+    // private Material material;
 
     private NavMeshAgent Enemy;
     private GameObject Player;
-    private Player playerComponent;
+    private PlayerMovement playerComponent;
 
     void Start()
     {
         Enemy = GetComponent<NavMeshAgent>();
         Player = GameObject.FindGameObjectWithTag("Player");
-        playerComponent = Player.GetComponent<Player>();
-        material = GetComponent<MeshRenderer>().material;
+        playerComponent = Player.GetComponent<PlayerMovement>();
+        // material = GetComponent<MeshRenderer>().material;
         timer = timeUntilStop;
         currentSpeed = patrolSpeed;
         state = MobState.Patrol;
@@ -57,7 +57,7 @@ public class EnemyAI : MonoBehaviour
 
         distanceToPlayer = Vector3.Distance(Enemy.transform.position, Player.transform.position);
         Enemy.speed = currentSpeed;
-        playerHealth = playerComponent.getHealth();
+        playerHealth = playerComponent.GetHealth();
 
         if (health <= 0f)
             state = MobState.Dead;
@@ -108,7 +108,7 @@ public class EnemyAI : MonoBehaviour
 
         if (Physics.Raycast(origin, direction, out hit, viewRadius))
         {
-            if (hit.transform.gameObject == Player || hit.transform.root.gameObject == Player) 
+            if (hit.transform.gameObject == Player || hit.transform.root.gameObject == Player)
             {
                 return true;
             }
@@ -183,7 +183,7 @@ public class EnemyAI : MonoBehaviour
             if (attackTimer <= 0f)
             {
                 attackTimer = attackInterval;
-                playerComponent.decreaseHealth(damage);
+                playerComponent.TakeDamage(damage);
             }
         }
     }
@@ -212,5 +212,20 @@ public class EnemyAI : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(origin, origin + direction * viewRadius);
         }
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        if (health <= 0f)
+        {
+            health = 0f;
+            state = MobState.Dead; 
+        }
+    }
+
+    public float GetHealth()
+    {
+        return health;
     }
 }
