@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 832cabc7b50421248be01e135c47f64a
   - enabled: 1
-    path: Assets/Scenes/TestPlayButtonScene.unity
-    guid: 9a2c373bfcdfbaa47a6de37e1e403a47
-  - enabled: 1
     path: Assets/Scenes/HUD.unity
     guid: 0b1677ce386dbd64889183720ce9378c
+  - enabled: 1
+    path: Assets/Scenes/MobControllerTestScene.unity
+    guid: 2a5fb8198f9528a49a34d5ec9b52ed7a
   m_configObjects: {}

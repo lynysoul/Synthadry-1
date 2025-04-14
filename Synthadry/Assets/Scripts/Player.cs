@@ -32,5 +32,6 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Игрок умер!");
         gameObject.SetActive(false);
+        ScenesManager.Instance.ChangeScene("MainMenu");
     }
 }

@@ -37,13 +37,13 @@ public class MobController : MonoBehaviour
 
     private NavMeshAgent Enemy;
     private GameObject Player;
-    private PlayerMovement playerComponent;
+    private PlayerHealth playerComponent;
 
     void Start()
     {
         Enemy = GetComponent<NavMeshAgent>();
         Player = GameObject.FindGameObjectWithTag("Player");
-        playerComponent = Player.GetComponent<PlayerMovement>();
+        playerComponent = Player.GetComponent<PlayerHealth>();
         // material = GetComponent<MeshRenderer>().material;
         timer = timeUntilStop;
         currentSpeed = patrolSpeed;

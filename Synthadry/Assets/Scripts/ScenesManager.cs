@@ -18,7 +18,7 @@ public class ScenesManager : MonoBehaviour
             case "MainMenu":
                 HandleMainMenuScene();
                 break;
-            case "TestPlayButtonScene":
+            default:
                 HandleLevelScene(scene);
                 break;
         }

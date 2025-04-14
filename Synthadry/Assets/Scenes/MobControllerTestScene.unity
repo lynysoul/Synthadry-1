@@ -1061,9 +1061,10 @@ GameObject:
   - component: {fileID: 1911746625}
   - component: {fileID: 1911746624}
   - component: {fileID: 1911746626}
+  - component: {fileID: 1911746627}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1120,20 +1121,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 1911746622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2dfcff0527c94a42afc48bd20c764aa, type: 3}
+  m_Script: {fileID: 11500000, guid: c123945f1de095f408e4a0d584f821f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 961739752}
+  moveSpeed: 8
+  runSpeedMultiplier: 1.5
+  gravity: 20
+  jumpHeight: 5
+  airControl: 0.3
+  friction: 6
+  stopSpeed: 100
+  airMoveSpeedMultiplier: 0.8
+  sensitivityX: 2
+  sensitivityY: 2
+  minAngleY: -60
+  maxAngleY: 60
+  maxFallSpeed: 30
+  earlyFallMultiplier: 2
+  lateFallMultiplier: 1.2
+  fallSpeedThreshold: 5
+  firstPersonCamera: {fileID: 961739752}
+--- !u!114 &1911746627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911746622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553727995c8bfa64f96194308b83cfdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   health: 100
-  walkSpeed: 6
-  runSpeed: 12
-  jumpPower: 14
-  gravity: 10
-  lookSpeed: 2
-  lookXLimit: 90
-  defaultHeight: 2
-  crouchHeight: 1
-  crouchSpeed: 3
 --- !u!1 &1945181608
 GameObject:
   m_ObjectHideFlags: 0
