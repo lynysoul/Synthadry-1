@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour
 {
-    [Header("Настройки дробовика")]
+    [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
     public float damage = 25f;
     public float range = 50f;
-    public float coneAngle = 20f; // Угол конуса в градусах
-    public float fireRate = 1f; // Выстрелов в секунду
-    public Transform barrelEnd; // Точка, из которой вылетает выстрел (конец дробовика)
-    public Camera playerCamera; // Камера игрока (для прицеливания)
-    public LayerMask targetLayers; // Слои, которые считаются врагами
-    public int coneVertices = 8; // Число вершин для визуализации конуса
-    public Vector3 positionOffset; // Смещение позиции дробовика от камеры
-    public Vector3 rotationOffset; // Смещение вращения дробовика от камеры
+    public float coneAngle = 20f; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float fireRate = 1f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public Transform barrelEnd; // пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+    public Camera playerCamera; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+    public LayerMask targetLayers; // пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public int coneVertices = 8; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public Vector3 positionOffset; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public Vector3 rotationOffset; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-    [Header("Эффекты")]
+    [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
     public GameObject muzzleFlashPrefab;
     public GameObject hitEffectPrefab;
     public AudioClip shotSound;
@@ -26,14 +26,14 @@ public class Shotgun : MonoBehaviour
     {
         if (barrelEnd == null)
         {
-            Debug.LogError("Не назначена точка barrelEnd!");
+            Debug.LogError("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ barrelEnd!");
             enabled = false;
             return;
         }
 
         if (playerCamera == null)
         {
-            Debug.LogError("Не назначена камера игрока!");
+            Debug.LogError("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!");
             enabled = false;
             return;
         }
@@ -43,7 +43,7 @@ public class Shotgun : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
-        audioSource.clip = shotSound; // Звук выстрела
+        audioSource.clip = shotSound; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     void Update()
@@ -58,58 +58,58 @@ public class Shotgun : MonoBehaviour
 
     void LateUpdate()
     {
-        // Установка позиции и поворота дробовика в соответствии с камерой
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         transform.position = playerCamera.transform.position + playerCamera.transform.rotation * positionOffset;
         transform.rotation = playerCamera.transform.rotation * Quaternion.Euler(rotationOffset);
     }
 
     void Shoot()
     {
-        //Эффект выстрела
+        //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         GameObject muzzleFlash = Instantiate(muzzleFlashPrefab, barrelEnd.position, barrelEnd.rotation);
-        Destroy(muzzleFlash, 1f); // Удаление эффекта через небольшое время
+        Destroy(muzzleFlash, 1f); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-        // Воспроизведение звука выстрела
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         audioSource.PlayOneShot(shotSound);
 
-        // Направление из камеры
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // Центр экрана
-        // Определение направления выстрела
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         Vector3 shootDirection = ray.direction;
 
-        // Обнаружение врагов в конусе
-        Collider[] hitColliders = Physics.OverlapSphere(barrelEnd.position, range, targetLayers); // Поиск целей в радиусе
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        Collider[] hitColliders = Physics.OverlapSphere(barrelEnd.position, range, targetLayers); // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
         foreach (Collider collider in hitColliders)
         {
-            // Нахождение цели в конусе
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             Vector3 targetDirection = (collider.transform.position - barrelEnd.position).normalized;
             float angleToTarget = Vector3.Angle(shootDirection, targetDirection);
 
             if (angleToTarget <= coneAngle / 2)
             {
-                // Нанесение урона
-                Debug.Log("Попали во врага: " + collider.name);
-                // Есть ли у цели скрипт здоровья или другой способ получения урона
-                Health targetHealth = collider.GetComponent<Health>();
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+                Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: " + collider.name);
+                // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+                MobController targetHealth = collider.GetComponent<MobController>();
                 if (targetHealth != null)
                 {
                     targetHealth.TakeDamage(damage);
 
-                    // Эффект попадания
+                    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     GameObject hitEffect = Instantiate(hitEffectPrefab, collider.ClosestPoint(barrelEnd.position), Quaternion.identity);
                     Destroy(hitEffect, 1f);
                 }
                 else
                 {
-                    Debug.LogWarning("У цели " + collider.name + " нет скрипта Health или другого скрипта для получения урона!");
+                    Debug.LogWarning("пїЅ пїЅпїЅпїЅпїЅ " + collider.name + " пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Health пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!");
                 }
             }
         }
     }
 
 
-    // Визуализация конуса в редакторе
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     void OnDrawGizmosSelected()
     {
         if (barrelEnd == null) return;
@@ -118,11 +118,11 @@ public class Shotgun : MonoBehaviour
         Matrix4x4 originalMatrix = Gizmos.matrix;
         Gizmos.matrix = Matrix4x4.TRS(barrelEnd.position, barrelEnd.rotation, Vector3.one);
 
-        // Рисуем пирамиду
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         float angleStep = 360f / coneVertices;
         float coneRadius = Mathf.Tan(coneAngle / 2 * Mathf.Deg2Rad) * range;
 
-        Vector3 apex = Vector3.zero; // Вершина пирамиды (совпадает с barrelEnd)
+        Vector3 apex = Vector3.zero; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ barrelEnd)
 
         Vector3[] baseVertices = new Vector3[coneVertices];
         for (int i = 0; i < coneVertices; i++)
@@ -131,11 +131,11 @@ public class Shotgun : MonoBehaviour
             baseVertices[i] = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * coneRadius, Mathf.Sin(angle * Mathf.Deg2Rad) * coneRadius, range);
         }
 
-        // Рисуем грани пирамиды
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         for (int i = 0; i < coneVertices; i++)
         {
             Gizmos.DrawLine(apex, baseVertices[i]);
-            Gizmos.DrawLine(baseVertices[i], baseVertices[(i + 1) % coneVertices]); // Соединяем вершины основания
+            Gizmos.DrawLine(baseVertices[i], baseVertices[(i + 1) % coneVertices]); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
         Gizmos.matrix = originalMatrix;
     }
