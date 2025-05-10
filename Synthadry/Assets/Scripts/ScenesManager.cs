@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
-    public static ScenesManager Instance;
+    public static ScenesManager Instance { get; private set; }
     void Start()
     {
         Instance = this;
@@ -27,7 +27,10 @@ public class ScenesManager : MonoBehaviour
     private void HandleMainMenuScene()
     {
         if (SceneManager.GetSceneByName("HUD").IsValid())
+        {
             SceneManager.UnloadSceneAsync("HUD");
+            SceneManager.UnloadSceneAsync("Pause");
+        }
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -36,5 +39,7 @@ public class ScenesManager : MonoBehaviour
         SceneManager.LoadSceneAsync(level);
         if (!SceneManager.GetSceneByName("HUD").IsValid())
             SceneManager.LoadSceneAsync("HUD", LoadSceneMode.Additive);
+        if (!SceneManager.GetSceneByName("Pause").IsValid())
+            SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
     }
 }
