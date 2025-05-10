@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MobController : MonoBehaviour
+public class MobController : MonoBehaviour, IPauseHandler
 {
     public enum MobState
     {
@@ -48,6 +48,30 @@ public class MobController : MonoBehaviour
         timer = timeUntilStop;
         currentSpeed = patrolSpeed;
         state = MobState.Patrol;
+    }
+
+    void Awake()
+    {
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.Register(this);
+        }
+        else
+        {
+            PauseManager.OnPauseManagerReady += OnPauseReady;
+        }
+    }
+
+    private void OnPauseReady()
+    {
+        PauseManager.Instance.Register(this);
+        PauseManager.OnPauseManagerReady -= OnPauseReady; // Отписываемся
+    }
+
+    void OnDestroy()
+    {
+        PauseManager.Instance.UnRegister(this);
+        PauseManager.OnPauseManagerReady -= OnPauseReady;
     }
 
     void Update()
@@ -227,5 +251,11 @@ public class MobController : MonoBehaviour
     public float GetHealth()
     {
         return health;
+    }
+
+    public void SetPaused(bool isPaused)
+    {
+        Enemy.isStopped = isPaused; // Остановка SetDirection
+        enabled = !isPaused; // Остановка Update, если пауза = true, то enabled должен быть равен = false
     }
 }

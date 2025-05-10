@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPauseHandler
 {
 
     public Camera firstPersonCamera;
@@ -54,13 +54,39 @@ public class PlayerMovement : MonoBehaviour
             enabled = false;
             return;
         }
+    }
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+    void Awake()
+    {
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.Register(this);
+        }
+        else
+        {
+            PauseManager.OnPauseManagerReady += OnPauseReady;
+        }
+    }
+
+    private void OnPauseReady()
+    {
+        PauseManager.Instance.Register(this);
+        PauseManager.OnPauseManagerReady -= OnPauseReady; // Отписываемся
+    }
+
+    void OnDestroy()
+    {
+        PauseManager.Instance.UnRegister(this);
+        PauseManager.OnPauseManagerReady -= OnPauseReady;
     }
 
     void Update()
     {
+        if (Input.GetButtonDown("Pause"))
+        {
+            Pause();
+        }
+
         HandleRotation();
 
         _isGrounded = _characterController.isGrounded;
@@ -191,6 +217,16 @@ public class PlayerMovement : MonoBehaviour
         _moveDirection.z = horizontalVelocity.y;
 
         _isJumping = true;
+    }
+
+    void Pause()
+    {
+        PauseManager.Instance.SetPaused(true);
+    }
+
+    public void SetPaused(bool isPaused)
+    {
+        enabled = !isPaused; // Остановка Update, если пауза = true, то enabled должен быть равен = false
     }
 
     void ApplyFriction()
