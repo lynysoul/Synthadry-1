@@ -38,16 +38,27 @@ public class MobController : MonoBehaviour
     private NavMeshAgent Enemy;
     private GameObject Player;
     private PlayerHealth playerComponent;
+    private Animator animator;
+    private int currentAnimState = -1;
+
+    private bool isIdle = false;
 
     void Start()
     {
         Enemy = GetComponent<NavMeshAgent>();
+
+        Enemy.updateRotation = true;
+        Enemy.angularSpeed = 1440f;
+        Enemy.acceleration = 60f;
+        Enemy.autoBraking = true;
+
         Player = GameObject.FindGameObjectWithTag("Player");
         playerComponent = Player.GetComponent<PlayerHealth>();
-        // material = GetComponent<MeshRenderer>().material;
+
         timer = timeUntilStop;
         currentSpeed = patrolSpeed;
         state = MobState.Patrol;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -97,6 +108,21 @@ public class MobController : MonoBehaviour
             default:
                 break;
         }
+
+        Debug.Log(state);
+        currentAnimState = (int)state;
+        if (!isIdle)
+        {
+            animator.SetInteger("state", currentAnimState);
+        }
+        else
+        {
+            animator.SetInteger("state", 4);
+        }
+
+        Debug.Log("State changed to: " + currentAnimState);
+        // RotateToMoveDirection();
+
     }
 
     bool CanSeePlayer()
@@ -132,11 +158,13 @@ public class MobController : MonoBehaviour
         {
             if (Enemy.isStopped)
             {
+                isIdle = false;
                 Enemy.isStopped = false;
                 timer = timeUntilStop;
             }
             else
             {
+                isIdle = true;
                 Enemy.isStopped = true;
                 timer = stopDuration;
             }
@@ -164,7 +192,11 @@ public class MobController : MonoBehaviour
             Enemy.SetDestination(lastPlayerPosition);
         }
         else
+        {
+            Enemy.ResetPath();
             state = MobState.Attack;
+        }
+
     }
 
     void Attack()
@@ -220,7 +252,7 @@ public class MobController : MonoBehaviour
         if (health <= 0f)
         {
             health = 0f;
-            state = MobState.Dead; 
+            state = MobState.Dead;
         }
     }
 
