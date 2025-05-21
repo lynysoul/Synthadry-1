@@ -289,5 +289,9 @@ public class MobController : MonoBehaviour, IPauseHandler
     {
         Enemy.isStopped = isPaused; // Остановка SetDirection
         enabled = !isPaused; // Остановка Update, если пауза = true, то enabled должен быть равен = false
+        if (isPaused)
+            animator.speed = 0f;
+        else
+            animator.speed = 1f;
     }
 }
