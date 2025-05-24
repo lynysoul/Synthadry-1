@@ -26,14 +26,14 @@ public class Shotgun : MonoBehaviour
     {
         if (barrelEnd == null)
         {
-            Debug.LogError("�� ��������� ����� barrelEnd!");
+            // Debug.LogError("�� ��������� ����� barrelEnd!");
             enabled = false;
             return;
         }
 
         if (playerCamera == null)
         {
-            Debug.LogError("�� ��������� ������ ������!");
+            // Debug.LogError("�� ��������� ������ ������!");
             enabled = false;
             return;
         }
@@ -89,7 +89,7 @@ public class Shotgun : MonoBehaviour
             if (angleToTarget <= coneAngle / 2)
             {
                 // ��������� �����
-                Debug.Log("������ �� �����: " + collider.name);
+                // Debug.Log("������ �� �����: " + collider.name);
                 // ���� �� � ���� ������ �������� ��� ������ ������ ��������� �����
                 MobController targetHealth = collider.GetComponent<MobController>();
                 if (targetHealth != null)
@@ -102,7 +102,7 @@ public class Shotgun : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning("� ���� " + collider.name + " ��� ������� Health ��� ������� ������� ��� ��������� �����!");
+                    // Debug.LogWarning("� ���� " + collider.name + " ��� ������� Health ��� ������� ������� ��� ��������� �����!");
                 }
             }
         }

@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!gameObject.CompareTag("Player"))
         {
-            Debug.LogError("Игровой объект должен иметь тег 'Player'!");
+            // Debug.LogError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 'Player'!");
         }
     }
     public void TakeDamage(float amount)
@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
         health -= amount;
         health = Mathf.Clamp(health, 0f, 100f); 
 
-        Debug.Log("Получен урон: " + amount + ", Текущее здоровье: " + health);
+        // Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ: " + amount + ", пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + health);
         if (health <= 0f)
         {
             Die();
@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Игрок умер!");
+        // Debug.Log("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ!");
         gameObject.SetActive(false);
         ScenesManager.Instance.ChangeScene("MainMenu");
     }
